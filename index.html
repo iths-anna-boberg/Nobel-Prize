@@ -10,7 +10,9 @@
 </head>
 <body>
     <header>
+            <div class="img-wrap"></div>
         <h1>Female Nobel Prize Laureates</h1>
+        
     </header>
     <section class="main">
         <article class="intro">
@@ -22,7 +24,7 @@
             <p>Check by year</p>
             <div class="select-wrapper">
                 <select name="year-list" id="select-year">
-                    <option value="1900" class="before">1900</option>
+                    <option value="1900" class="before">Choose year</option>
                 </select>
                 <button id="year-btn">OK</button>
             </div>
@@ -31,7 +33,16 @@
             </div>
         </article>
         <article class="category">
-
+            <p>Check by category</p>
+            <div class="select-category-wrapper">
+                    <select name="category-list" id="select-category">
+                        <option value="Choose category" class="before">Choose category</option>
+                    </select>
+                    <button id="year-btn">OK</button>
+                </div>
+                <div class="result">
+                    
+                </div>
         </article>
     </section>
     <script src="js/main.js"></script>
