@@ -30,7 +30,7 @@ async function renderLaureatesByYear(){
     let btnYear = document.querySelector("#year-btn")
     let selectOption = document.querySelector("#select-year")
     let result = document.querySelector(".result")
-
+    var femLaur = false;
     
     btnYear.addEventListener("click", event =>{
         result.innerHTML = " "
@@ -50,16 +50,16 @@ async function renderLaureatesByYear(){
                 let presentAward = document.createElement("p")
                 presentAward.textContent = `was awarded the ${laureate.nobelPrizes[0].categoryFullName.en}.` 
                 result.appendChild(presentAward)
+                femLaur = true
 
-
-            }
-            else{
-                console.log("Nope")
-                result.innerHTML = " "
-                let negativeRes = document.createElement("p")
-                negativeRes.textContent = `In ${selectedYear} there were no female laureates. Sorry.`
-                result.appendChild(negativeRes)
-            }
+            }        
+            
+        }
+        if(femLaur == false){
+            result.innerHTML = " "
+            let negativeRes = document.createElement("p")
+            negativeRes.textContent = `In ${selectedYear} there were no female laureates. Sorry.`
+            result.appendChild(negativeRes)
         }
     })
 
