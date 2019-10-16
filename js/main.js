@@ -33,6 +33,7 @@ async function renderLaureatesByYear(){
 
     
     btnYear.addEventListener("click", event =>{
+        result.innerHTML = " "
         let selectedYear = selectOption.value
         for (let i=0; i<list.length; i++){
             let laureate = list[i]
@@ -47,14 +48,18 @@ async function renderLaureatesByYear(){
                 nameHeading.textContent = laureate.knownName.en
                 result.appendChild(nameHeading)
                 let presentAward = document.createElement("p")
-                presentAward.textContent = `was awarded the ${laureate.nobelPrizes[0].categoryFullName.en}.` //funkar inte pga lista, se ovan
+                presentAward.textContent = `was awarded the ${laureate.nobelPrizes[0].categoryFullName.en}.` 
                 result.appendChild(presentAward)
 
 
             }
-            // else{
-            //     console.log("Nope")
-            // }
+            else{
+                console.log("Nope")
+                result.innerHTML = " "
+                let negativeRes = document.createElement("p")
+                negativeRes.textContent = `In ${selectedYear} there were no female laureates. Sorry.`
+                result.appendChild(negativeRes)
+            }
         }
     })
 
