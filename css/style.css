@@ -13,7 +13,12 @@ h1{
     padding-bottom: 3rem;
 }
 
-h2,h3,h4{
+h2{
+    font-family: 'Cardo', serif;
+    color: #EFE2BA;
+}
+
+h3,h4{
     font-family: 'Cardo', serif;
     color: #4056A1;
 }

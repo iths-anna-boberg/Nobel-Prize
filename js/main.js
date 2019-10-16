@@ -29,6 +29,7 @@ async function renderLaureatesByYear(){
     let list = await getLaureates();
     let btnYear = document.querySelector("#year-btn")
     let selectOption = document.querySelector("#select-year")
+    let result = document.querySelector(".result")
 
     
     btnYear.addEventListener("click", event =>{
@@ -38,8 +39,18 @@ async function renderLaureatesByYear(){
             let firstNobelPrize = laureate.nobelPrizes[0]
             let awardYear = firstNobelPrize.awardYear
             if(selectedYear==awardYear){
-                let name = list[i]
-                console.log(name.knownName.en)
+                console.log(laureate.knownName.en)
+                let presentYear = document.createElement("p")
+                presentYear.textContent = `In ${awardYear}`
+                result.appendChild(presentYear)
+                let nameHeading = document.createElement("h2")
+                nameHeading.textContent = laureate.knownName.en
+                result.appendChild(nameHeading)
+                let presentAward = document.createElement("p")
+                presentAward.textContent = `was awarded the ${laureate.nobelPrizes[0].categoryFullName.en}.` //funkar inte pga lista, se ovan
+                result.appendChild(presentAward)
+
+
             }
             // else{
             //     console.log("Nope")
