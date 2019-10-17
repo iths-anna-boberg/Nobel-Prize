@@ -30,10 +30,11 @@ async function renderLaureatesByYear(){
     let btnYear = document.querySelector("#year-btn")
     let selectOption = document.querySelector("#select-year")
     let result = document.querySelector(".result")
-    var femLaur = false;
+    
     
     btnYear.addEventListener("click", event =>{
         result.innerHTML = " "
+        var femLaur = false;
         let selectedYear = selectOption.value
         for (let i=0; i<list.length; i++){
             let laureate = list[i]
