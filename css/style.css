@@ -23,8 +23,11 @@ h3,h4{
     color: #4056A1;
 }
 
+a{
+    color: #C5CBE3;
+}
+
 header{
-    /* background-image: url(/img/fem_nobprize@552x300.png); */
     background-color: #4056A1;
     margin: 0;
     max-width: 100vw;

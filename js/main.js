@@ -1,3 +1,21 @@
+
+
+
+//funktion som ska hämta wiki-information 
+async function createWikiLink(name){
+    let searchGet = `https://en.wikipedia.org/w/api.php?action=opensearch&search=${name}&limit=1&format=json&origin=*`
+    let response = await fetch(searchGet, {
+        headers: {
+            'User-Agent': 'anna.boberg@iths.se'
+        }
+    })
+    let listResponse = await response.json()
+    console.log(listResponse)
+    return listResponse[3]
+} 
+
+
+
 async function getLaureates(){
     let response = await fetch('https://api.nobelprize.org/2.0/laureates?gender=female&limit=100')
     let listLaureates = await response.json()
@@ -45,7 +63,7 @@ async function renderLaureatesByYear(){
     let result = document.querySelector(".result")
     
     
-    btnYear.addEventListener("click", event =>{
+    btnYear.addEventListener("click", async event =>{
         result.innerHTML = " "
         var femLaur = false;
         let selectedYear = selectOption.value
@@ -64,6 +82,12 @@ async function renderLaureatesByYear(){
                 let presentAward = document.createElement("p")
                 presentAward.textContent = `was awarded the ${laureate.nobelPrizes[0].categoryFullName.en}.` 
                 result.appendChild(presentAward)
+                let linkUrl = await createWikiLink(laureate.knownName.en);
+                let linkElement = document.createElement("a");
+                linkElement.setAttribute("href", linkUrl);
+                linkElement.setAttribute("target", "_blank");
+                linkElement.innerHTML = `Read about ${laureate.knownName.en} on Wikipedia.org`;
+                result.appendChild(linkElement);
                 femLaur = true
 
             }        
