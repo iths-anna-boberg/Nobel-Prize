@@ -4,13 +4,16 @@ async function getLaureates(){
     return listLaureates.laureates;
 }
 
-function createCheckYear(){
+function createCheckLists(){
     
     let selectList = document.querySelector("#select-year")
     let itemTest = document.querySelector("option.before");
+    let categoryTest = document.querySelector("option.before-c")
     let startYear = 1901;
     let d = new Date();
     let endYear = d.getFullYear();
+    let selectCategory = document.querySelector("#select-category")
+    let categoryList = ["Chemistry","Literature","Peace","Physiology or Medicine","Physics","Economic Sciences"]
     
     while (startYear <= endYear) {
         let yearOption = itemTest.cloneNode(true);
@@ -21,6 +24,16 @@ function createCheckYear(){
         selectList.append(yearOption);
         startYear++;
     }
+
+    for(let item of categoryList){
+        let categoryOption = categoryTest.cloneNode(true);
+        categoryOption.setAttribute("value",item);
+        categoryOption.classList.remove("before-c");
+        categoryOption.classList.add("category-option-list");
+        categoryOption.innerText = item;
+        selectCategory.append(categoryOption);
+    }
+
 }
 
 
@@ -66,5 +79,38 @@ async function renderLaureatesByYear(){
 
 }
 
-createCheckYear();
+async function renderLaureatesByCategory(){
+    let list = await getLaureates();
+    let btnCat = document.querySelector("#cat-btn")
+    let selectOption = document.querySelector("#select-category")
+    let result = document.querySelector(".category-result")
+
+    btnCat.addEventListener("click", event =>{
+        result.innerHTML = " "
+        let selectedCat = selectOption.value
+        for (let i=0; i<list.length; i++){
+            let laureate = list[i]
+            let categoryPrize = laureate.nobelPrizes[0].category
+            let categoryName = categoryPrize.en
+
+            if(selectedCat == categoryName){
+                console.log(laureate.knownName.en)
+                let nameHeading = document.createElement("h2")
+                nameHeading.textContent = laureate.knownName.en
+                result.appendChild(nameHeading)
+                let categoryFull = document.createElement("p")
+                categoryFull.textContent = `was awarded ${laureate.nobelPrizes[0].categoryFullName.en} in ${laureate.nobelPrizes[0].awardYear}, ${laureate.nobelPrizes[0].motivation.en}.`
+                result.appendChild(categoryFull)
+
+            }
+        }
+
+
+    })
+
+ 
+}
+
+createCheckLists();
 renderLaureatesByYear();
+renderLaureatesByCategory();
